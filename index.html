@@ -200,7 +200,60 @@ footer img { width: 34px; height: auto; }
    ===================================================================== */
 const SITE_NAME = "Русский и котики";
 
+/* Заготовка для уроков, к которым файлы ещё не загружены: на странице
+   будут кнопки «Скоро появится». Когда файлы появятся, впишите path. */
+function pendingGroups(withNotebook) {
+  const groups = [];
+  if (withNotebook) {
+    groups.push({
+      title: "Тетрадь",
+      hint: "Конспект заполнен. В скрипте оставлены пропуски, их вы заполняете во время урока.",
+      files: [
+        { title: "Конспект: заполненная тетрадь", path: "" },
+        { title: "Скрипт: тетрадь с пропусками", path: "" }
+      ]
+    });
+  }
+  groups.push({
+    title: "Домашнее задание",
+    hint: "Один и тот же файл в двух форматах: для печати и для работы в Word.",
+    files: [
+      { title: "Домашнее задание", path: "" },
+      { title: "Домашнее задание", path: "" }
+    ]
+  });
+  return groups;
+}
+
 const LESSONS = [
+  {
+    slug: "9",
+    tag: "9",
+    title: "9 задание ЕГЭ",
+    kinescope: "9e2ab294-8544-408f-9e90-7167e8c81bcf",
+    groups: pendingGroups(true)
+  },
+  {
+    slug: "10",
+    tag: "10",
+    title: "10 задание ЕГЭ",
+    kinescope: "6cc09fb4-94b9-4500-b193-9f60027b0928",
+    groups: pendingGroups(true)
+  },
+  {
+    slug: "11",
+    tag: "11",
+    title: "11 задание ЕГЭ",
+    kinescope: "7540ebf7-71cc-485d-a342-7abadff15076",
+    groups: pendingGroups(true)
+  },
+  {
+    slug: "9-11",
+    tag: "9–11",
+    title: "Нарешка 9–11 заданий ЕГЭ",
+    kinescope: "522094f5-1e8d-442b-a78d-942315342cad",
+    groups: pendingGroups(false)
+  },
   {
     slug: "12",
     tag: "12",
@@ -271,6 +324,20 @@ const LESSONS = [
         ]
       }
     ]
+  },
+  {
+    slug: "avtorskaya-poziciya",
+    tag: "Лекция",
+    title: "Изучаем авторскую позицию",
+    kinescope: "a5512dcf-1310-483a-ac4e-35df13ecae92",
+    groups: []
+  },
+  {
+    slug: "kommentariy",
+    tag: "Лекция",
+    title: "Изучаем комментарий",
+    kinescope: "db65eff0-02c3-4eb1-9021-40769a98b2bb",
+    groups: []
   },
   {
     slug: "psychology",
