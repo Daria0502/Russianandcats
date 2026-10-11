@@ -124,6 +124,8 @@ main { flex: 1; padding-block: 20px 72px; }
 .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 .video .empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 20px; color: #f1dfe2; }
 .video .empty img { width: 92px; height: auto; }
+.vlink { margin: 10px 6px 0; font-size: .9rem; }
+.vlink a { color: var(--burgundy); text-underline-offset: 3px; }
 .video .empty strong { color: #fff; font-weight: 700; font-size: 1.1rem; }
 
 .files { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; }
@@ -134,7 +136,24 @@ main { flex: 1; padding-block: 20px 72px; }
 .file .kind { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
 .file .title { font-weight: 700; font-size: 1.1rem; line-height: 1.3; }
 .file .info { color: var(--ink-soft); font-size: .85rem; margin-bottom: 16px; }
+.file .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
 .file .btn { align-self: flex-start; margin-top: auto; }
+.file .actions .btn { margin-top: 0; }
+.btn.ghost { background: transparent; color: var(--burgundy); box-shadow: inset 0 0 0 1.5px var(--burgundy); }
+.btn.ghost:hover { background: rgba(147,5,31,.06); filter: none; }
+.btn svg + * { white-space: nowrap; }
+
+/* служебная страница проверки файлов (#/check) */
+.check-sum { font-weight: 700; font-size: 1.1rem; margin: 0 0 18px; }
+.check-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.check-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; padding: 12px 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 18px; }
+.check-row b { font-weight: 700; }
+.check-row code { display: block; font: 400 .8rem/1.4 ui-monospace, Menlo, Consolas, monospace; color: var(--ink-soft); overflow-wrap: anywhere; }
+.check-row .st { align-self: center; font-weight: 700; font-size: .9rem; white-space: nowrap; color: var(--ink-soft); }
+.check-row.ok .st { color: #1f7a45; }
+.check-row.bad { border-color: var(--burgundy); }
+.check-row.bad .st { color: var(--burgundy); }
+@media (max-width: 520px) { .check-row { grid-template-columns: 1fr; } }
 .file.soon { border-style: dashed; background: transparent; }
 .file.soon .btn { background: transparent; color: var(--ink-soft); border: 1px solid var(--line); cursor: default; pointer-events: none; }
 
@@ -184,7 +203,7 @@ footer img { width: 34px; height: auto; }
    НАСТРОЙКИ. Здесь список уроков. Чтобы добавить файл или видео,
    впишите путь или ID в нужное место.
 
-   kinescope — ID для встраивания видео из Кинескопа.
+   kinescope — ссылка или ID видео из Кинескопа.
                ""   — на странице покажется заглушка «Видео скоро появится».
                null — блока с видео на странице не будет.
    groups    — группы файлов на странице урока.
@@ -225,6 +244,7 @@ const LESSONS = [
     tag: "9",
     title: "9 задание ЕГЭ",
     kinescope: "9e2ab294-8544-408f-9e90-7167e8c81bcf",
+    link: "https://kinescope.io/kwNDMgugeyDy5qjcBH8tTM/pl3WZbAg",
     groups: [
       {
         title: "Тетрадь",
@@ -249,6 +269,7 @@ const LESSONS = [
     tag: "10",
     title: "10 задание ЕГЭ",
     kinescope: "6cc09fb4-94b9-4500-b193-9f60027b0928",
+    link: "https://kinescope.io/eqTSUGo1d7KE37gtQyWYmh/plplnEm7",
     groups: [
       {
         title: "Тетрадь",
@@ -273,6 +294,7 @@ const LESSONS = [
     tag: "11",
     title: "11 задание ЕГЭ",
     kinescope: "7540ebf7-71cc-485d-a342-7abadff15076",
+    link: "https://kinescope.io/ftMgEKqqBQX2fNsTiF8Yvu/plhPIrR9",
     groups: [
       {
         title: "Тетрадь",
@@ -297,6 +319,7 @@ const LESSONS = [
     tag: "9–11",
     title: "Нарешка 9–11 заданий ЕГЭ",
     kinescope: "522094f5-1e8d-442b-a78d-942315342cad",
+    link: "https://kinescope.io/0cEsdjR5ScwnpKELRDy8uy/plQOkFwP",
     groups: [
       {
         title: "Тетрадь",
@@ -320,6 +343,7 @@ const LESSONS = [
     tag: "12",
     title: "12 задание ЕГЭ",
     kinescope: "f8d4c14c-9a0a-4dbe-b502-6de62ab7b8f1",
+    link: "https://kinescope.io/wJ9Gaww2zTkQCaSSAsmH8p/plT4biAd",
     groups: [
       {
         title: "Тетрадь",
@@ -344,6 +368,7 @@ const LESSONS = [
     tag: "13",
     title: "13 задание ЕГЭ",
     kinescope: "ff5be3b2-7942-4e2a-a81d-5c635f7e49d2",
+    link: "https://kinescope.io/xwUnP1cgwpS2uDQeRkgnyW/pldxue3O",
     groups: [
       {
         title: "Тетрадь",
@@ -368,6 +393,7 @@ const LESSONS = [
     tag: "12–13",
     title: "Нарешка 12–13 заданий ЕГЭ",
     kinescope: "73c5257c-924c-4cc5-9cce-eb1e4680bd52",
+    link: "https://kinescope.io/0cEGuXx1oiVor9emfroAMJ/plgYuUqj",
     groups: [
       {
         title: "Тетрадь",
@@ -390,7 +416,19 @@ const LESSONS = [
     slug: "14",
     tag: "14",
     title: "14 задание ЕГЭ",
-    kinescope: "https://kinescope.io/71Wh1TcQajFqcL3Uu3BLL1/plkiyj5p",
+    /* Два видео. Вставьте ссылку на видео Кинескопа между кавычками:
+       kinescope: "https://kinescope.io/...."  (подойдёт ссылка целиком или только ID). */
+    videos: [
+      {
+        title: "Видеолекция, часть 1",
+        kinescope: "30b847e3-2c09-4a8b-bb8a-04d4ad3a7340",
+        link: "https://kinescope.io/71Wh1TcQajFqcL3Uu3BLL1/plkiyj5p"   /* ЧАСТЬ 1 (уже вставлена) */
+      },
+      {
+        title: "Видеолекция, часть 2",
+        kinescope: ""   /* ← ЧАСТЬ 2: вставьте ссылку сюда, между кавычками */
+      }
+    ],
     groups: [
       {
         title: "Тетрадь, часть 1",
@@ -423,6 +461,7 @@ const LESSONS = [
     tag: "Лекция",
     title: "Изучаем авторскую позицию",
     kinescope: "a5512dcf-1310-483a-ac4e-35df13ecae92",
+    link: "https://kinescope.io/mq1UfXYvJyoixuWMQoTkRU/plu1w3BW",
     groups: [
       {
         title: "Тетрадь",
@@ -438,6 +477,7 @@ const LESSONS = [
     tag: "Лекция",
     title: "Изучаем комментарий",
     kinescope: "db65eff0-02c3-4eb1-9021-40769a98b2bb",
+    link: "https://kinescope.io/t6mf39sqCz5A5weS9Bii7B/plnrIRSJ",
     groups: [
       {
         title: "Тетрадь",
@@ -453,6 +493,7 @@ const LESSONS = [
     tag: "Лекция",
     title: "Психологическая лекция",
     kinescope: "aaa06015-a517-4955-8e86-a74e59c8ee11",
+    link: "https://kinescope.io/0cEGvgnE4C1ute3Wxsq8aw/plibj4xs",
     groups: []
   },
   {
@@ -493,9 +534,16 @@ function extOf(path) {
   return m ? m[1].toUpperCase() : "";
 }
 
+/* Список видео урока: либо videos: [...], либо одно видео в kinescope. */
+function lessonVideos(l) {
+  if (Array.isArray(l.videos)) return l.videos;
+  if (l.kinescope === null || l.kinescope === undefined) return [];
+  return [{ title: "Видеолекция", kinescope: l.kinescope, link: l.link }];
+}
+
 function lessonParts(l) {
   const parts = [];
-  if (l.kinescope !== null) parts.push("видео");
+  if (lessonVideos(l).length) parts.push("видео");
   l.groups.forEach(function (g) { parts.push(g.title.toLowerCase()); });
   return parts.join(" · ");
 }
@@ -520,11 +568,20 @@ function renderHome() {
     '<ul class="grid">' + cards + '</ul>';
 }
 
+/* Ссылка «смотреть в Кинескопе»: берём link, а если его нет, то саму ссылку из kinescope. */
+function videoLink(v) {
+  if (v.link) return v.link;
+  const s = String(v.kinescope).trim();
+  return /^https?:\/\//.test(s) ? s : "https://kinescope.io/embed/" + s;
+}
+
 function kinescopeSrc(v) {
   v = String(v).trim();
   const m = v.match(/kinescope\.io\/(?:embed\/)?([A-Za-z0-9_-]+)/);
   return "https://kinescope.io/embed/" + (m ? m[1] : v);
 }
+
+const ICON_OPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
 
 function fileCard(l, f) {
   const ext = extOf(f.path);
@@ -535,22 +592,30 @@ function fileCard(l, f) {
   }
   const saveAs = l.title + " — " + f.title + (ext ? "." + ext.toLowerCase() : "");
   const info = ext + (f.size ? " · " + f.size : "");
+  /* PDF можно открыть прямо в браузере; Word-файл только скачивается. */
+  const openBtn = ext === "PDF"
+    ? '<a class="btn" href="' + esc(f.path) + '" target="_blank" rel="noopener">' + ICON_OPEN + 'открыть</a>'
+    : '';
+  const dlClass = ext === "PDF" ? "btn ghost" : "btn";
   return '<div class="file"><span class="kind">' + esc(ext === "DOCX" ? "Word" : "PDF") + '</span>' +
     '<span class="title">' + esc(f.title) + '</span>' +
     '<span class="info">' + esc(info) + '</span>' +
-    '<a class="btn" href="' + esc(f.path) + '" download="' + esc(saveAs) + '">' + ICON_DOWNLOAD + 'скачать</a></div>';
+    '<div class="actions">' + openBtn +
+    '<a class="' + dlClass + '" href="' + esc(f.path) + '" download="' + esc(saveAs) + '">' + ICON_DOWNLOAD + 'скачать</a></div></div>';
 }
 
 function renderLesson(l) {
   document.title = l.title + " · " + SITE_NAME;
-  let videoBlock = "";
-  if (l.kinescope !== null) {
-    const inner = l.kinescope
-      ? '<iframe src="' + esc(kinescopeSrc(l.kinescope)) + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write;" allowfullscreen title="Видеолекция: ' + esc(l.title) + '"></iframe>'
+  const vids = lessonVideos(l);
+  const videoBlock = vids.map(function (v) {
+    const inner = v.kinescope
+      ? '<iframe src="' + esc(kinescopeSrc(v.kinescope)) + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write;" allowfullscreen title="' + esc((v.title || "Видеолекция") + ": " + l.title) + '"></iframe>'
       : '<div class="empty"><img alt="" src="' + LOGO + '"><strong>Видео скоро появится</strong><span>Лекция загружается, загляните чуть позже.</span></div>';
-    videoBlock = '<section class="block"><h2>видеолекция</h2>' +
-      '<p class="hint">Смотрите прямо на странице.</p><div class="video">' + inner + '</div></section>';
-  }
+    return '<section class="block"><h2>' + esc(v.title || "Видеолекция") + '</h2>' +
+      '<p class="hint">Смотрите прямо на странице.</p><div class="video">' + inner + '</div>' +
+      (v.kinescope ? '<p class="vlink"><a href="' + esc(videoLink(v)) + '" target="_blank" rel="noopener">Не открывается видео? Смотреть в Кинескопе →</a></p>' : '') +
+      '</section>';
+  }).join("");
 
   const groups = l.groups.map(function (g) {
     return '<section class="block"><h2>' + esc(g.title) + '</h2>' +
@@ -567,12 +632,54 @@ function renderLesson(l) {
 
 /* Подпись версии в подвале: по ней видно, какая версия сайта открылась. */
 document.getElementById("stamp").textContent =
-  "обновлено 11.10.2026, разделов: " + LESSONS.length;
+  "обновлено 11.10.2026 (версия 9), разделов: " + LESSONS.length;
+
+/* Служебная страница #/check: показывает, какие файлы реально лежат на сайте. */
+function renderCheck() {
+  document.title = "Проверка файлов · " + SITE_NAME;
+  const items = [];
+  LESSONS.forEach(function (l) {
+    l.groups.forEach(function (g) {
+      g.files.forEach(function (f) { if (f.path) items.push({ lesson: l.title, file: f.title, path: f.path }); });
+    });
+  });
+  app.innerHTML =
+    '<section class="hero"><p class="eyebrow">Для администратора</p>' +
+    '<h1 class="sticker">Проверка файлов</h1></section>' +
+    '<p class="check-sum" id="checkSum">Проверяю файлов: ' + items.length + '…</p>' +
+    '<ul class="check-list">' + items.map(function (it, i) {
+      return '<li class="check-row" id="chk' + i + '"><span><b>' + esc(it.lesson) + '</b> · ' + esc(it.file) +
+        '<code>' + esc(it.path) + '</code></span><span class="st">проверяю…</span></li>';
+    }).join("") + '</ul>';
+  let done = 0, bad = 0, unknown = 0;
+  function finish() {
+    done++;
+    if (done < items.length) return;
+    const sum = document.getElementById("checkSum");
+    if (!sum) return;
+    sum.textContent = unknown
+      ? "Не удалось проверить. Откройте сайт по его ссылке в интернете, а не файл с компьютера."
+      : bad
+        ? "Не найдено файлов: " + bad + " из " + items.length + ". Загрузите их по путям, указанным ниже."
+        : "Файлов на месте: " + items.length + " из " + items.length + ". Все открываются.";
+  }
+  items.forEach(function (it, i) {
+    const row = document.getElementById("chk" + i);
+    const st = row.querySelector(".st");
+    fetch(it.path, { method: "HEAD", cache: "no-store" }).then(function (r) {
+      if (r.ok) { row.classList.add("ok"); st.textContent = "✓ открывается"; }
+      else { bad++; row.classList.add("bad"); st.textContent = "✗ не найден (" + r.status + ")"; }
+    }).catch(function () {
+      unknown++; st.textContent = "не удалось проверить";
+    }).then(finish);
+  });
+}
 
 function route() {
   const slug = decodeURIComponent(location.hash.replace(/^#\/?/, ""));
   const lesson = LESSONS.find(function (l) { return l.slug === slug; });
-  if (lesson) renderLesson(lesson); else renderHome();
+  if (slug === "check") renderCheck();
+  else if (lesson) renderLesson(lesson); else renderHome();
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
