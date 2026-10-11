@@ -56,7 +56,6 @@ a { color: inherit; }
   font-weight: 700; font-size: 1.55rem; line-height: 1.02; color: var(--burgundy);
   text-transform: uppercase; letter-spacing: .01em;
 }
-.nav { margin-left: auto; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -116,8 +115,6 @@ main { flex: 1; padding-block: 20px 72px; }
 .card:hover .arrow { transform: translateX(4px); }
 
 /* ---------- страница урока ---------- */
-.back { margin-bottom: 22px; padding: 9px 20px; border-radius: 999px; font-size: .95rem; background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.55); }
-.back:hover { background: rgba(255,255,255,.22); filter: none; }
 
 .block { margin-bottom: 40px; }
 .block h2 { font-weight: 700; font-size: 1.5rem; margin: 0 0 6px; text-transform: lowercase; }
@@ -152,14 +149,12 @@ footer img { width: 34px; height: auto; }
   .brand { padding-inline: 18px; }
   .brand img { width: 58px; }
   .brand span { font-size: 1.2rem; }
-  .nav { margin-left: 0; }
   .hero { padding-block: 30px 34px; border-radius: 26px; }
   main { padding-block: 16px 52px; }
 }
 @media (max-width: 440px) {
   .topbar .wrap { gap: 10px; }
   .topbar .wrap > .pill { flex: 1 1 100%; justify-content: center; }
-  .nav { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -172,7 +167,6 @@ footer img { width: 34px; height: auto; }
       <img class="logo" alt="" width="78">
       <span>Русский<br>и котики</span>
     </a>
-    <nav class="pill nav"><a class="btn" href="#/">все разделы</a></nav>
   </div>
 </header>
 
@@ -181,7 +175,7 @@ footer img { width: 34px; height: auto; }
 <footer>
   <div class="wrap">
     <img class="logo" alt="" width="34">
-    <span>Русский и котики · годовой курс 26/27</span>
+    <span>Русский и котики · годовой курс 26/27 · <span id="stamp"></span></span>
   </div>
 </footer>
 
@@ -231,28 +225,95 @@ const LESSONS = [
     tag: "9",
     title: "9 задание ЕГЭ",
     kinescope: "9e2ab294-8544-408f-9e90-7167e8c81bcf",
-    groups: pendingGroups(true)
+    groups: [
+      {
+        title: "Тетрадь",
+        hint: "Конспект заполнен. В рабочей тетради оставлены пропуски, их вы заполняете во время урока.",
+        files: [
+          { title: "Конспект: заполненная тетрадь", path: "files/9/konspekt.pdf", size: "14,3 МБ" },
+          { title: "Рабочая тетрадь: с пропусками", path: "files/9/rabochaya-tetrad.pdf", size: "14,3 МБ" }
+        ]
+      },
+      {
+        title: "Домашнее задание",
+        hint: "Один и тот же файл в двух форматах: для печати и для работы в Word.",
+        files: [
+          { title: "Домашнее задание", path: "files/9/dz.pdf", size: "269 КБ" },
+          { title: "Домашнее задание", path: "files/9/dz.docx", size: "21 КБ" }
+        ]
+      }
+    ]
   },
   {
     slug: "10",
     tag: "10",
     title: "10 задание ЕГЭ",
     kinescope: "6cc09fb4-94b9-4500-b193-9f60027b0928",
-    groups: pendingGroups(true)
+    groups: [
+      {
+        title: "Тетрадь",
+        hint: "Конспект заполнен. В скрипте оставлены пропуски, их вы заполняете во время урока.",
+        files: [
+          { title: "Конспект: заполненная тетрадь", path: "files/10/konspekt.pdf", size: "11,6 МБ" },
+          { title: "Скрипт: тетрадь с пропусками", path: "files/10/skript.pdf", size: "11,6 МБ" }
+        ]
+      },
+      {
+        title: "Домашнее задание",
+        hint: "Один и тот же файл в двух форматах: для печати и для работы в Word.",
+        files: [
+          { title: "Домашнее задание", path: "files/10/dz.pdf", size: "250 КБ" },
+          { title: "Домашнее задание", path: "files/10/dz.docx", size: "23 КБ" }
+        ]
+      }
+    ]
   },
   {
     slug: "11",
     tag: "11",
     title: "11 задание ЕГЭ",
     kinescope: "7540ebf7-71cc-485d-a342-7abadff15076",
-    groups: pendingGroups(true)
+    groups: [
+      {
+        title: "Тетрадь",
+        hint: "Конспект заполнен. В скрипте оставлены пропуски, их вы заполняете во время урока.",
+        files: [
+          { title: "Конспект: заполненная тетрадь", path: "files/11/konspekt.pdf", size: "12,5 МБ" },
+          { title: "Скрипт: тетрадь с пропусками", path: "files/11/skript.pdf", size: "12,5 МБ" }
+        ]
+      },
+      {
+        title: "Домашнее задание",
+        hint: "Один и тот же файл в двух форматах: для печати и для работы в Word.",
+        files: [
+          { title: "Домашнее задание", path: "files/11/dz.pdf", size: "276 КБ" },
+          { title: "Домашнее задание", path: "files/11/dz.docx", size: "22 КБ" }
+        ]
+      }
+    ]
   },
   {
     slug: "9-11",
     tag: "9–11",
     title: "Нарешка 9–11 заданий ЕГЭ",
     kinescope: "522094f5-1e8d-442b-a78d-942315342cad",
-    groups: pendingGroups(false)
+    groups: [
+      {
+        title: "Тетрадь",
+        hint: "Рабочая тетрадь для решения на уроке.",
+        files: [
+          { title: "Рабочая тетрадь", path: "files/9-11/rabochaya-tetrad.pdf", size: "16,2 МБ" }
+        ]
+      },
+      {
+        title: "Домашнее задание",
+        hint: "Один и тот же файл в двух форматах: для печати и для работы в Word.",
+        files: [
+          { title: "Домашнее задание", path: "files/9-11/dz.pdf", size: "144 КБ" },
+          { title: "Домашнее задание", path: "files/9-11/dz.docx", size: "21 КБ" }
+        ]
+      }
+    ]
   },
   {
     slug: "12",
@@ -326,18 +387,66 @@ const LESSONS = [
     ]
   },
   {
+    slug: "14",
+    tag: "14",
+    title: "14 задание ЕГЭ",
+    kinescope: "",
+    groups: [
+      {
+        title: "Тетрадь, часть 1",
+        hint: "Конспект заполнен. В скрипте оставлены пропуски, их вы заполняете во время урока.",
+        files: [
+          { title: "Конспект: заполненная тетрадь", path: "files/14/chast1-konspekt.pdf", size: "10 МБ" },
+          { title: "Скрипт: тетрадь с пропусками", path: "files/14/chast1-skript.pdf", size: "10 МБ" }
+        ]
+      },
+      {
+        title: "Тетрадь, часть 2",
+        hint: "Конспект заполнен. В скрипте оставлены пропуски, их вы заполняете во время урока.",
+        files: [
+          { title: "Конспект: заполненная тетрадь", path: "files/14/chast2-konspekt.pdf", size: "4 МБ" },
+          { title: "Скрипт: тетрадь с пропусками", path: "files/14/chast2-skript.pdf", size: "2,9 МБ" }
+        ]
+      },
+      {
+        title: "Домашнее задание",
+        hint: "Один и тот же файл в двух форматах: для печати и для работы в Word.",
+        files: [
+          { title: "Домашнее задание", path: "" },
+          { title: "Домашнее задание", path: "" }
+        ]
+      }
+    ]
+  },
+  {
     slug: "avtorskaya-poziciya",
     tag: "Лекция",
     title: "Изучаем авторскую позицию",
     kinescope: "a5512dcf-1310-483a-ac4e-35df13ecae92",
-    groups: []
+    groups: [
+      {
+        title: "Тетрадь",
+        hint: "Конспект лекции «Учимся писать авторскую позицию и отрабатываем технику».",
+        files: [
+          { title: "Конспект", path: "files/avtorskaya-poziciya/konspekt.pdf", size: "11,9 МБ" }
+        ]
+      }
+    ]
   },
   {
     slug: "kommentariy",
     tag: "Лекция",
     title: "Изучаем комментарий",
     kinescope: "db65eff0-02c3-4eb1-9021-40769a98b2bb",
-    groups: []
+    groups: [
+      {
+        title: "Тетрадь",
+        hint: "Рабочая тетрадь «Пишем комментарий + практика».",
+        files: [
+          { title: "Рабочая тетрадь", path: "files/kommentariy/rabochaya-tetrad.pdf", size: "19,1 МБ" }
+        ]
+      }
+    ]
   },
   {
     slug: "psychology",
@@ -407,7 +516,7 @@ function renderHome() {
       '<h1 class="sticker">Материалы уроков</h1>' +
       '<p class="lead">Выберите урок: видеолекция, тетради и домашнее задание в одном месте.</p>' +
     '</section>' +
-    '<h2 class="section-title">разделы</h2>' +
+    '<h2 class="section-title" id="sections">разделы</h2>' +
     '<ul class="grid">' + cards + '</ul>';
 }
 
@@ -451,11 +560,14 @@ function renderLesson(l) {
 
   app.innerHTML =
     '<section class="hero">' +
-      '<a class="btn back" href="#/"><span aria-hidden="true">←</span> все разделы</a>' +
       '<p class="eyebrow">Годовой курс 26/27</p>' +
       '<h1 class="sticker">' + esc(l.title) + '</h1>' +
     '</section>' + videoBlock + groups;
 }
+
+/* Подпись версии в подвале: по ней видно, какая версия сайта открылась. */
+document.getElementById("stamp").textContent =
+  "обновлено 11.10.2026, разделов: " + LESSONS.length;
 
 function route() {
   const slug = decodeURIComponent(location.hash.replace(/^#\/?/, ""));
